@@ -1,6 +1,6 @@
-% Database for relevant courses
+% transcript
 
 % use below to import file:
-% :- include('courseDataBase.pl').
+% :- include('transcript.pl').
 
 % CPSC courses
