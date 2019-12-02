@@ -6,7 +6,7 @@
 % Main functions
 % ---------------------------------------------------------------------------- 
 
-% graduated(T) is true if the Transcript T given will allow you to graduate.
+% graduated(T) is true if the Transcript T (list) given will allow you to graduate.
 graduated(T) :-
     complete(T, _, _, _, _).
 
@@ -72,7 +72,6 @@ removeFromTranscript(T1, [H|T], T2) :-
 % Courses infomation 
 % ---------------------------------------------------------------------------- 
 
-prop(cpsc,faculty,science).
 
 % cpsc courses
 
@@ -280,6 +279,233 @@ course(cpsc490,number,490).
 course(cpsc490,department,cpsc).
 course(cpsc490, credits, 3).
 course(cpsc490, name, "cpsc490").
+
+% math courses
+
+% 100 level
+course(math100,number,100).
+course(math100,department,math).
+course(math100, credits, 3).
+course(math100, name, "math100").
+
+course(math101,number,101).
+course(math101,department,math).
+course(math101, credits, 3).
+course(math101, name, "math101").
+
+course(math102,number,102).
+course(math102,department,math).
+course(math102, credits, 3).
+course(math102, name, "math102").
+
+course(math103,number,103).
+course(math103,department,math).
+course(math103, credits, 3).
+course(math103, name, "math103").
+
+course(math104,number,104).
+course(math104,department,math).
+course(math104, credits, 3).
+course(math104, name, "math104").
+
+course(math105,number,105).
+course(math105,department,math).
+course(math105, credits, 3).
+course(math105, name, "math105").
+
+course(math180,number,180).
+course(math180,department,math).
+course(math180, credits, 4).
+course(math180, name, "math180").
+
+course(math184,number,184).
+course(math184,department,math).
+course(math184, credits, 4).
+course(math184, name, "math184").
+
+course(math120,number,120).
+course(math120,department,math).
+course(math120, credits, 4).
+course(math120, name, "math120").
+
+course(math121,number,121).
+course(math121,department,math).
+course(math121, credits, 4).
+course(math121, name, "math121").
+
+% 200 level
+course(math200,number,200).
+course(math200,department,math).
+course(math200, credits, 3).
+course(math200, name, "math200").
+
+course(math221,number,221).
+course(math221,department,math).
+course(math221, credits, 3).
+course(math221, name, "math221").
+
+course(math302,number,302).
+course(math302,department,math).
+course(math302, credits, 3).
+course(math302, name, "math302").
+
+% stat courses
+
+% 200 level
+course(stat200,number,200).
+course(stat200,department,stat).
+course(stat200, credits, 3).
+course(stat200, name, "stat200").
+
+course(stat241,number,241).
+course(stat241,department,stat).
+course(stat241, credits, 3).
+course(stat241, name, "stat241").
+
+course(stat251,number,251).
+course(stat251,department,stat).
+course(stat251, credits, 3).
+course(stat251, name, "stat251").
+
+% 300 level
+course(stat302,number,302).
+course(stat302,department,stat).
+course(stat302, credits, 3).
+course(stat302, name, "stat302").
+
+% communications
+
+course(wrds150,number,150).
+course(wrds150,department,wrds).
+course(wrds150, credits, 3).
+course(wrds150, name, "wrds150").
+course(wrds150, requirements, communications).
+
+course(scie113,number,113).
+course(scie113,department,scie).
+course(scie113, credits, 3).
+course(scie113, name, "scie113").
+course(scie113, requirements, communications).
+
+course(scie300,number,300).
+course(scie300,department,scie).
+course(scie300, credits, 3).
+course(scie300, name, "scie300").
+course(scie300, requirements, communications).
+
+course(chem300,number,300).
+course(chem300,department,chem).
+course(chem300, credits, 3).
+course(chem300, name, "chem300").
+course(chem300, requirements, communications).
+
+course(apsc176,number,176).
+course(apsc176,department,apsc).
+course(apsc176, credits, 3).
+course(apsc176, name, "apsc176").
+course(apsc176, requirements, communications).
+
+course(lfs150,number,150).
+course(lfs150,department,lfs).
+course(lfs150, credits, 3).
+course(lfs150, name, "lfs150").
+course(lfs150, requirements, communications).
+
+course(astu100,number,100).
+course(astu100,department,astu).
+course(astu100, credits, 3).
+course(astu100, name, "astu100").
+course(astu100, requirements, communications).
+
+course(astu101,number,101).
+course(astu101,department,astu).
+course(astu101, credits, 3).
+course(astu101, name, "astu101").
+course(astu101, requirements, communications).
+
+% lab science
+
+course(astr101,number,101).
+course(astr101,department,astr).
+course(astr101, credits, 3).
+course(astr101, name, "astr101").
+course(astr101, requirements, labscience).
+
+course(astr102,number,102).
+course(astr102,department,astr).
+course(astr102, credits, 3).
+course(astr102, name, "astr102").
+course(astr102, requirements, labscience).
+
+course(biol140,number,140).
+course(biol140,department,biol).
+course(biol140, credits, 2).
+course(biol140, name, "biol140").
+course(biol140, requirements, labscience).
+
+course(chem111,number,111).
+course(chem111,department,chem).
+course(chem111, credits, 4).
+course(chem111, name, "chem111").
+course(chem111, requirements, labscience).
+
+course(chem121,number,121).
+course(chem121,department,chem).
+course(chem121, credits, 4).
+course(chem121, name, "chem121").
+course(chem121, requirements, labscience).
+
+course(chem123,number,123).
+course(chem123,department,chem).
+course(chem123, credits, 4).
+course(chem123, name, "chem123").
+course(chem123, requirements, labscience).
+
+course(eosc111,number,111).
+course(eosc111,department,eosc).
+course(eosc111, credits, 1).
+course(eosc111, name, "eosc111").
+course(eosc111, requirements, labscience).
+
+course(phys101,number,101).
+course(phys101,department,phys).
+course(phys101, credits, 3).
+course(phys101, name, "phys101").
+course(phys101, requirements, labscience).
+
+course(phys107,number,107).
+course(phys107,department,phys).
+course(phys107, credits, 3).
+course(phys107, name, "phys107").
+course(phys107, requirements, labscience).
+
+course(phys109,number,109).
+course(phys109,department,phys).
+course(phys109, credits, 1).
+course(phys109, name, "phys109").
+course(phys109, requirements, labscience).
+
+course(phys119,number,119).
+course(phys119,department,phys).
+course(phys119, credits, 1).
+course(phys119, name, "phys119").
+course(phys119, requirements, labscience).
+
+course(phys159,number,159).
+course(phys159,department,phys).
+course(phys159, credits, 1).
+course(phys159, name, "phys159").
+course(phys159, requirements, labscience).
+
+
+
+
+
+
+
+
+
+
 
 
 
