@@ -497,6 +497,47 @@ course(phys159, credits, 1).
 course(phys159, name, "phys159").
 course(phys159, requirements, labscience).
 
+% dummy arts course
+course(arts100,number,100).
+course(arts100,department,arts).
+course(arts100, credits, 3).
+course(arts100, name, "arts100").
+
+course(arts101,number,101).
+course(arts101,department,arts).
+course(arts101, credits, 3).
+course(arts101, name, "arts101").
+
+course(arts102,number,102).
+course(arts102,department,arts).
+course(arts102, credits, 3).
+course(arts102, name, "arts102").
+
+course(arts103,number,103).
+course(arts103,department,arts).
+course(arts103, credits, 3).
+course(arts103, name, "arts103").
+
+course(arts300,number,300).
+course(arts300,department,arts).
+course(arts300, credits, 3).
+course(arts300, name, "arts300").
+
+course(arts301,number,301).
+course(arts301,department,arts).
+course(arts301, credits, 3).
+course(arts301, name, "arts301").
+
+course(arts302,number,302).
+course(arts302,department,arts).
+course(arts302, credits, 3).
+course(arts302, name, "arts302").
+
+course(arts303,number,303).
+course(arts303,department,arts).
+course(arts303, credits, 3).
+course(arts303, name, "arts303").
+
 
 
 
