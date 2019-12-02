@@ -55,7 +55,6 @@ sciCount(T) :-
     onlyScienceCreditCounter(T, ScienceCourses, ScienceCredit),
     72 @=< ScienceCredit.
 
-% TODO Abstract this with the arts version below
 % onlyScienceCreditCounter(T, ScienceCourses, Total) is true if ScienceCourses is the subset of science courses in a transcript,
 %                                                            and total is the number of science credits
 onlyScienceCreditCounter(T, ScienceCourses, Total) :-
@@ -68,8 +67,7 @@ upperCount(T) :-
     creditCounter(UpperScienceCourses, Total),
     48 @=< Total.
 
-% upperScieCount(T) is true if transcript T has 30 credits 300 level+ 
-% and from the science faculty.
+% upperScieCount(T) is true if transcript T has 30 credits 300 level+ and from the science faculty.
 upperScieCount(T) :-
     findall(C, (course(C, faculty, science), member(C, T), course(C, number, X), 300 @=< X), UpperScienceCourses),
     creditCounter(UpperScienceCourses, Total),
@@ -81,15 +79,43 @@ artCount(T) :-
     12 @=< ArtCredit,
     ArtCredit @=< 18.
 
-% TODO Abstract this with the science version above
 % onlyArtsCreditCounter(T, ArtCourses, Total) is true if ArtCourses is the subset of art classses in a transcript,
 %                                                     and total is the number of art credits. Helper function
 onlyArtsCreditCounter(Transcript, ArtCourses, Total) :-
     findall(C, (course(C,faculty,arts), member(C, T)), ArtCourses),
     creditCounter(ArtCourses, Total).
 
-% >breadth(T) is true if transcript T has atleast 3 credits from 6 of the following course codes
+% breadth(T) is true if transcript T has atleast 3 credits from 6 of the following course codes
 % math, chem, phys, biol, stat, cpsc, eosc
+breadth(T) :- onlyMissMathBreadth(T).
+breadth(T) :- onlyMissChemBreadth(T).
+breadth(T) :- onlyMissPhysBreadth(T).
+breadth(T) :- onlyMissBiolBreadth(T).
+breadth(T) :- onlyMissStatBreadth(T).
+breadth(T) :- onlyMissCpscBreadth(T).
+breadth(T) :- onlyMissEoscBreadth(T).
+
+onlyMissMathBreadth(T) :- course(_,department,chem), course(_,department,phys),
+                          course(_,department,biol), course(_,department,stat),
+                          course(_,department,cpsc), course(_,department,eosc).
+onlyMissChemBreadth(T) :- course(_,department,math), course(_,department,phys),
+                          course(_,department,biol), course(_,department,stat),
+                          course(_,department,cpsc), course(_,department,eosc).
+onlyMissPhysBreadth(T) :- course(_,department,math), course(_,department,chem),
+                          course(_,department,biol), course(_,department,stat),
+                          course(_,department,cpsc), course(_,department,eosc).
+onlyMissBiolBreadth(T) :- course(_,department,math), course(_,department,chem),
+                          course(_,department,phys), course(_,department,stat),
+                          course(_,department,cpsc), course(_,department,eosc).
+onlyMissStatBreadth(T) :- course(_,department,math), course(_,department,chem),
+                          course(_,department,phys), course(_,department,biol),
+                          course(_,department,cpsc), course(_,department,eosc).
+onlyMissCpscBreadth(T) :- course(_,department,math), course(_,department,chem),
+                          course(_,department,phys), course(_,department,biol),
+                          course(_,department,stat), course(_,department,eosc).
+onlyMissEoscBreadth(T) :- course(_,department,math), course(_,department,chem),
+                          course(_,department,phys), course(_,department,biol),
+                          course(_,department,stat), course(_,department,cpsc).
 
 % communicationsRequirement(T,R) is true if transcript T has atleast 6 credits from communications 
 % , and T1 is T without the 6 credits from communications.
