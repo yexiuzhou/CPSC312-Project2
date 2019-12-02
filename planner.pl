@@ -29,6 +29,20 @@ complete(T,Communications,Lab,Core,UpperCS) :-
 	upperCSRequirements(T3,T4),
 	isDifferent(T3,UpperCS,T4).
 
+% some very basic nlp
+q(Ans) :-
+    write("Ask me: "),
+    readln(Ln),
+    ask(T, Q, Ans).
+
+ask(T, ['can', 'i', 'graduate', 'yet'], 'yes') :- 
+    % find a way to read transcript
+    complete(T).
+
+ask(T, ['can', 'i', 'graduate', 'yet'], 'not yet') :- 
+    % find a way to read transcript
+    \+ complete(T).
+
 % Helper functions
 % ---------------------------------------------------------------------------- 
 
