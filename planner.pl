@@ -87,35 +87,27 @@ onlyArtsCreditCounter(Transcript, ArtCourses, Total) :-
 
 % breadth(T) is true if transcript T has atleast 3 credits from 6 of the following course codes
 % math, chem, phys, biol, stat, cpsc, eosc
-breadth(T) :- onlyMissMathBreadth(T).
-breadth(T) :- onlyMissChemBreadth(T).
-breadth(T) :- onlyMissPhysBreadth(T).
-breadth(T) :- onlyMissBiolBreadth(T).
-breadth(T) :- onlyMissStatBreadth(T).
-breadth(T) :- onlyMissCpscBreadth(T).
-breadth(T) :- onlyMissEoscBreadth(T).
+% missing math
+breadth(T) :- onlyMissXBreadth(T,[chem,phys,biol,stat,cpsc,eosc]).
+% missing chem
+breadth(T) :- onlyMissXBreadth(T,[math,phys,biol,stat,cpsc,eosc]).
+% missing phys
+breadth(T) :- onlyMissXBreadth(T,[math,chem,biol,stat,cpsc,eosc]).
+% missing biol
+breadth(T) :- onlyMissXBreadth(T,[math,chem,phys,stat,cpsc,eosc]).
+% missing stat
+breadth(T) :- onlyMissXBreadth(T,[math,chem,phys,biol,cpsc,eosc]).
+% missing cpsc
+breadth(T) :- onlyMissXBreadth(T,[math,chem,phys,biol,stat,eosc]).
+% missing eosc
+breadth(T) :- onlyMissXBreadth(T,[math,chem,phys,biol,stat,cpsc]).
 
-onlyMissMathBreadth(T) :- course(_,department,chem), course(_,department,phys),
-                          course(_,department,biol), course(_,department,stat),
-                          course(_,department,cpsc), course(_,department,eosc).
-onlyMissChemBreadth(T) :- course(_,department,math), course(_,department,phys),
-                          course(_,department,biol), course(_,department,stat),
-                          course(_,department,cpsc), course(_,department,eosc).
-onlyMissPhysBreadth(T) :- course(_,department,math), course(_,department,chem),
-                          course(_,department,biol), course(_,department,stat),
-                          course(_,department,cpsc), course(_,department,eosc).
-onlyMissBiolBreadth(T) :- course(_,department,math), course(_,department,chem),
-                          course(_,department,phys), course(_,department,stat),
-                          course(_,department,cpsc), course(_,department,eosc).
-onlyMissStatBreadth(T) :- course(_,department,math), course(_,department,chem),
-                          course(_,department,phys), course(_,department,biol),
-                          course(_,department,cpsc), course(_,department,eosc).
-onlyMissCpscBreadth(T) :- course(_,department,math), course(_,department,chem),
-                          course(_,department,phys), course(_,department,biol),
-                          course(_,department,stat), course(_,department,eosc).
-onlyMissEoscBreadth(T) :- course(_,department,math), course(_,department,chem),
-                          course(_,department,phys), course(_,department,biol),
-                          course(_,department,stat), course(_,department,cpsc).
+% onlyMissXBreadth(Transcript,List) is true if all type of courses in the list are present in the transcript
+onlyMissXBreadth(Transcript,[]).
+onlyMissXBreadth(Transcript,[H|T]) :-
+    course(C, department, H),
+    member(C,T),
+    onlyMissXBreadth(Transcript,T).
 
 % communicationsRequirement(T,R) is true if transcript T has atleast 6 credits from communications 
 % , and T1 is T without the 6 credits from communications.
