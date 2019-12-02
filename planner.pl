@@ -79,7 +79,7 @@ artCount(T) :-
     12 @=< ArtCredit,
     ArtCredit @=< 18.
 
-% onlyArtsCreditCounter(T, ArtCourses, Total) is true if ArtCourses is the subset of art classses in a transcript,
+% >onlyArtsCreditCounter(T, ArtCourses, Total) is true if ArtCourses is the subset of art classses in a transcript,
 %                                                     and total is the number of art credits. Helper function
 onlyArtsCreditCounter(Transcript, ArtCourses, Total) :-
     findall(C, (course(C,faculty,arts), member(C, T)), ArtCourses),
