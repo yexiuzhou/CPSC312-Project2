@@ -74,16 +74,27 @@ onlyArtsCreditCounter(Transcript, ArtCourses, Total) :-
     findall(C, (course(C,faculty,arts), member(C, T)), ArtCourses),
     creditCounter(ArtCourses, Total).
 
-% breadth(T) is true if transcript T has atleast 3 credits from 6 of the following course codes
+% >breadth(T) is true if transcript T has atleast 3 credits from 6 of the following course codes
 % math, chem, phys, biol, stat, cpsc, eosc
 
-% communicationsRequirement(T,T1) is true if transcript T has atleast 6 credits from communications 
+% communicationsRequirement(T,R) is true if transcript T has atleast 6 credits from communications 
 % , and T1 is T without the 6 credits from communications.
+communicationsRequirement(T,R) :- 
+    % is true if you can remove 2 communication requirements
+    removeComms(T,_, T1),
+    removeComms(T1,_,R).
 
-% lab_requirements(T,T1) is true if transcript T has atleast 3 credits from lab requirements 
-% , and T1 is T without the 3 credits from lab requirements.
+% removeComms(T,C,R)  is true if R is T with a communications course C removed
+removeComms(T,C,R) :-
+    course(C, requirements, communications),
+    select(C, T, R).
+
+% lab_requirements(T,R) is true if transcript T has atleast 3 credits from lab requirements 
+% , and R is T without the lab requirements.
 lab_requirements(T,R) :- 
-    removeLab(T,R).
+    course(C,requirements, labscience),
+    select(C,T,R).
+
 
 % coreRequirements(T,T1) is true if transcript T has completed required named courses and 
 % T1 has them removed.
@@ -125,9 +136,9 @@ removeStat(T,R) :- removeFromTranscript(T,[stat251],R).
 removeStat(T,R) :- removeFromTranscript(T,[stat200,math302],R).
 removeStat(T,R) :- removeFromTranscript(T,[stat200,stat302],R).
 
-% upperCSRequirements(T,T1) is true if transcript T has atleast 3 300 level+ cs courses and
+% upperCSRequirements(T,R) is true if transcript T has atleast 3 300 level+ cs courses and
 % 3 400 level+ cs courses (excluding 310,313,320 but they should already be removed so its ok),
-% and T1 has them removed.
+% and R has them removed.
 upperCSRequirements(T,R) :- 
 	% is true if you can remove  3 300 level+ cs courses 
 	% and 3 400 level+ cs courses
@@ -138,7 +149,7 @@ upperCSRequirements(T,R) :-
     remove400levelcpsc(T4, _, T5),
     remove400levelcpsc(T5, _, R).
 
-% remove300levelcpsc(T, C, T1) is true if transcript R is T with a 3rd year cpsc course C removed
+% remove300levelcpsc(T, C, R) is true if transcript R is T with a 3rd year cpsc course C removed
 remove300levelcpsc(T, C, R) :-
     course(C, number, Cnum),
     course(C, department, cpsc),
