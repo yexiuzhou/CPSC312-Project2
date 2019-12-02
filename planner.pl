@@ -206,116 +206,116 @@ course(cpsc121, name, "cpsc121").
 % 200 level
 course(cpsc210, number, 210).
 course(cpsc210, department, cpsc).
-course(cpsc210, department, cpsc).
+course(cpsc210, faculty, science).
 course(cpsc210, credits, 4).
 course(cpsc210, name, "cpsc210").
 
 course(cpsc213, number, 213).
 course(cpsc213, department, cpsc).
-course(cpsc213, department, cpsc).
+course(cpsc213, faculty, science).
 course(cpsc213, credits, 4).
 course(cpsc213, name, "cpsc213").
 
 course(cpsc221, number, 221).
 course(cpsc221, department, cpsc).
-course(cpsc221, department, cpsc).
+course(cpsc221, faculty, science).
 course(cpsc221, credits, 4).
 course(cpsc221, name, "cpsc221").
 
 % 300 level
 course(cpsc302, number, 302).
 course(cpsc302, department, cpsc).
-course(cpsc302, department, cpsc).
+course(cpsc302, faculty, science).
 course(cpsc302, credits, 3).
 course(cpsc302, name, "cpsc302").
 
 course(cpsc303, number, 303).
 course(cpsc303, department, cpsc).
-course(cpsc303, department, cpsc).
+course(cpsc303, faculty, science).
 course(cpsc303, credits, 3).
 course(cpsc303, name, "cpsc303").
 
 course(cpsc304, number, 304).
 course(cpsc304, department, cpsc).
-course(cpsc304, department, cpsc).
+course(cpsc304, faculty, science).
 course(cpsc304, credits, 3).
 course(cpsc304, name, "cpsc304").
 
 course(cpsc310, number, 310).
 course(cpsc310, department, cpsc).
-course(cpsc310, department, cpsc).
+course(cpsc310, faculty, science).
 course(cpsc310, credits, 3).
 course(cpsc310, name, "cpsc310").
 
 course(cpsc311, number, 311).
 course(cpsc311, department, cpsc).
-course(cpsc311, department, cpsc).
+course(cpsc311, faculty, science).
 course(cpsc311, credits, 3).
 course(cpsc311, name, "cpsc311").
 
 course(cpsc312, number, 312).
 course(cpsc312, department, cpsc).
-course(cpsc312, department, cpsc).
+course(cpsc312, faculty, science).
 course(cpsc312, credits, 3).
 course(cpsc312, name, "cpsc312").
 
 course(cpsc313, number, 313).
 course(cpsc313, department, cpsc).
-course(cpsc313, department, cpsc).
+course(cpsc313, faculty, science).
 course(cpsc313, credits, 3).
 course(cpsc313, name, "cpsc313").
 
 course(cpsc314, number, 314).
 course(cpsc314, department, cpsc).
-course(cpsc314, department, cpsc).
+course(cpsc314, faculty, science).
 course(cpsc314, credits, 3).
 course(cpsc314, name, "cpsc314").
 
 course(cpsc317, number, 317).
 course(cpsc317, department, cpsc).
-course(cpsc317, department, cpsc).
+course(cpsc317, faculty, science).
 course(cpsc317, credits, 3).
 course(cpsc317, name, "cpsc317").
 
 course(cpsc319, number, 319).
 course(cpsc319, department, cpsc).
-course(cpsc319, department, cpsc).
+course(cpsc319, faculty, science).
 course(cpsc319, credits, 4).
 course(cpsc319, name, "cpsc319").
 
 course(cpsc320, number, 320).
 course(cpsc320, department, cpsc).
-course(cpsc320, department, cpsc).
+course(cpsc320, faculty, science).
 course(cpsc320, credits, 3).
 course(cpsc320, name, "cpsc320").
 
 course(cpsc322, number, 322).
 course(cpsc322, department, cpsc).
-course(cpsc322, department, cpsc).
+course(cpsc322, faculty, science).
 course(cpsc322, credits, 3).
 course(cpsc322, name, "cpsc322").
 
 course(cpsc330, number, 330).
 course(cpsc330, department, cpsc).
-course(cpsc330, department, cpsc).
+course(cpsc330, faculty, science).
 course(cpsc330, credits, 3).
 course(cpsc330, name, "cpsc330").
 
 course(cpsc340, number, 340).
 course(cpsc340, department, cpsc).
-course(cpsc340, department, cpsc).
+course(cpsc340, faculty, science).
 course(cpsc340, credits, 3).
 course(cpsc340, name, "cpsc340").
 
 course(cpsc344, number, 344).
 course(cpsc344, department, cpsc).
-course(cpsc344, department, cpsc).
+course(cpsc344, faculty, science).
 course(cpsc344, credits, 3).
 course(cpsc344, name, "cpsc344").
 
 course(cpsc349, number, 349).
 course(cpsc349, department, cpsc).
-course(cpsc349, department, cpsc).
+course(cpsc349, faculty, science).
 course(cpsc349, credits, 3).
 course(cpsc349, name, "cpsc349").
 
@@ -500,11 +500,13 @@ course(math221, name, "math221").
 
 course(math223,number,223).
 course(math223,department,math).
+course(math223, faculty, science).
 course(math223, credits, 3).
 course(math223, name, "math223").
 
 course(math253,number,253).
 course(math253,department,math).
+course(math253, faculty, science).
 course(math253, credits, 3).
 course(math253, name, "math253").
 
