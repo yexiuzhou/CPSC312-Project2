@@ -74,18 +74,31 @@ onlyArtsCreditCounter(Transcript, ArtCourses, Total) :-
     findall(C, (course(C,faculty,arts), member(C, T)), ArtCourses),
     creditCounter(ArtCourses, Total).
 
-% breadth(T) is true if transcript T has atleast 3 credits from 6 of the following course codes
+% >breadth(T) is true if transcript T has atleast 3 credits from 6 of the following course codes
 % math, chem, phys, biol, stat, cpsc, eosc
 
-% communicationsRequirement(T,T1) is true if transcript T has atleast 6 credits from communications 
+% communicationsRequirement(T,R) is true if transcript T has atleast 6 credits from communications 
 % , and T1 is T without the 6 credits from communications.
+communicationsRequirement(T,R) :- 
+    % is true if you can remove 2 communication requirements
+    removeComms(T,_, T1),
+    removeComms(T1,_,R).
 
-% lab_requirements(T,T1) is true if transcript T has atleast 3 credits from lab requirements 
-% , and T1 is T without the 3 credits from lab requirements.
+% removeComms(T,C,R)  is true if R is T with a communications course C removed
+removeComms(T,C,R) :-
+    course(C, requirements, communications),
+    select(C, T, R).
+
+% lab_requirements(T,R) is true if transcript T has atleast 3 credits from lab requirements 
+% , and R is T without the lab requirements.
+lab_requirements(T,R) :- 
+    course(C,requirements, labscience),
+    select(C,T,R).
+
 
 % coreRequirements(T,T1) is true if transcript T has completed required named courses and 
 % T1 has them removed.
-coreRequirements(T,T1) :-
+coreRequirements(T,R) :-
 	removeFromTranscript(T,[cpsc110,cpsc121],T1),
 	removeCalc1(T1,T2),
 	removeCalc2(T2,T3),
@@ -93,59 +106,59 @@ coreRequirements(T,T1) :-
 	removeCalc3(T4,T5),
 	removeLinAlg(T5,T6),
 	removeStat(T6,T7),
-	removeFromTranscript(T7,[cpsc310,cpsc320,cpsc313],T8).
+	removeFromTranscript(T7,[cpsc310,cpsc320,cpsc313],R).
 
 % all of these are calc 1 courses
-removeCalc1(T,T1) :- removeFromTranscript(T,[math100],T1).
-removeCalc1(T,T1) :- removeFromTranscript(T,[math102],T1).
-removeCalc1(T,T1) :- removeFromTranscript(T,[math104],T1).
-removeCalc1(T,T1) :- removeFromTranscript(T,[math180],T1).
-removeCalc1(T,T1) :- removeFromTranscript(T,[math184],T1).
-removeCalc1(T,T1) :- removeFromTranscript(T,[math120],T1).
+removeCalc1(T,R) :- removeFromTranscript(T,[math100],R).
+removeCalc1(T,R) :- removeFromTranscript(T,[math102],R).
+removeCalc1(T,R) :- removeFromTranscript(T,[math104],R).
+removeCalc1(T,R) :- removeFromTranscript(T,[math180],R).
+removeCalc1(T,R) :- removeFromTranscript(T,[math184],R).
+removeCalc1(T,R) :- removeFromTranscript(T,[math120],R).
 
 % all of these are calc 2 courses
-removeCalc2(T,T1) :- removeFromTranscript(T,[math101],T1).
-removeCalc2(T,T1) :- removeFromTranscript(T,[math103],T1).
-removeCalc2(T,T1) :- removeFromTranscript(T,[math105],T1).
-removeCalc2(T,T1) :- removeFromTranscript(T,[math121],T1).
+removeCalc2(T,R) :- removeFromTranscript(T,[math101],R).
+removeCalc2(T,R) :- removeFromTranscript(T,[math103],R).
+removeCalc2(T,R) :- removeFromTranscript(T,[math105],R).
+removeCalc2(T,R) :- removeFromTranscript(T,[math121],R).
 
 % all of these are calc 3 courses
-removeCalc3(T,T1) :- removeFromTranscript(T,[math200],T1).
-removeCalc3(T,T1) :- removeFromTranscript(T,[math253],T1).
+removeCalc3(T,R) :- removeFromTranscript(T,[math200],R).
+removeCalc3(T,R) :- removeFromTranscript(T,[math253],R).
 
 % all of these are calc lnear algebra courses
-removeLinAlg(T,T1) :- removeFromTranscript(T,[math221],T1).
-removeLinAlg(T,T1) :- removeFromTranscript(T,[math223],T1).
+removeLinAlg(T,R) :- removeFromTranscript(T,[math221],R).
+removeLinAlg(T,R) :- removeFromTranscript(T,[math223],R).
 
 % there are 4 ways to satisfy stat requirements
-removeStat(T,T1) :- removeFromTranscript(T,[stat241],T1).
-removeStat(T,T1) :- removeFromTranscript(T,[stat251],T1).
-removeStat(T,T1) :- removeFromTranscript(T,[stat200,math302],T1).
-removeStat(T,T1) :- removeFromTranscript(T,[stat200,stat302],T1).
+removeStat(T,R) :- removeFromTranscript(T,[stat241],R).
+removeStat(T,R) :- removeFromTranscript(T,[stat251],R).
+removeStat(T,R) :- removeFromTranscript(T,[stat200,math302],R).
+removeStat(T,R) :- removeFromTranscript(T,[stat200,stat302],R).
 
-% upperCSRequirements(T,T1) is true if transcript T has atleast 3 300 level+ cs courses and
+% upperCSRequirements(T,R) is true if transcript T has atleast 3 300 level+ cs courses and
 % 3 400 level+ cs courses (excluding 310,313,320 but they should already be removed so its ok),
-% and T1 has them removed.
-upperCSRequirements(T,T1) :- 
+% and R has them removed.
+upperCSRequirements(T,R) :- 
 	% is true if you can remove  3 300 level+ cs courses 
 	% and 3 400 level+ cs courses
-    remove300levelcpsc(R1, _, R2),
-    remove300levelcpsc(R2, _, R3),
-    remove300levelcpsc(R3, _, R4),
-    remove400levelcpsc(R4, _, R5),
-    remove400levelcpsc(R5, _, R6),
-    remove400levelcpsc(R6, _, T1).
+    remove300levelcpsc(T, _, T1),
+    remove300levelcpsc(T1, _, T2),
+    remove300levelcpsc(T2, _, T3),
+    remove400levelcpsc(T3, _, T4),
+    remove400levelcpsc(T4, _, T5),
+    remove400levelcpsc(T5, _, R).
 
-% remove300levelcpsc(T, C, T1) is true if transcript T1 is T with a 3rd year cpsc course C removed
-remove300levelcpsc(T, C, T1) :-
+% remove300levelcpsc(T, C, R) is true if transcript R is T with a 3rd year cpsc course C removed
+remove300levelcpsc(T, C, R) :-
     course(C, number, Cnum),
     course(C, department, cpsc),
     CourseNumber >= 300,
     CourseNumber < 400,
     select(C, T, R).
 
-% remove400levelcpsc(T, C, T1) is true if transcript T1 is T with a 4rd year cpsc course C removed
-remove400levelcpsc(T, C, T1) :-
+% remove400levelcpsc(T, C, R) is true if transcript R is T with a 4rd year cpsc course C removed
+remove400levelcpsc(T, C, R) :-
     course(C, number, Cnum),
     course(C, department, cpsc),
     CourseNumber >= 400,
