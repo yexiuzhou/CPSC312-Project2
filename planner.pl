@@ -4,10 +4,10 @@
 
 % graduated(T) is true if the Transcript T given will allow you to graduate.
 graduated(T) :-
-    complete(T, _, _, _, _, _).
+    complete(T, _, _, _, _).
 
 
-% complete(T,Communications,Lab,Art,Core,UpperCS) is True if
+% complete(T,Communications,Lab,Core,UpperCS) is True if
 % Transcript T fulfills the 8 requirements.
 complete(T,Communications,Lab,Core,UpperCS) :-
 	creditCount(T),
@@ -55,3 +55,9 @@ complete(T,Communications,Lab,Core,UpperCS) :-
 isDifferent(T,[],T).
 isDifferent(T1,Requirements,T2) :-
 	subtract(T1,T2,Requirements).
+
+
+
+
+
+
