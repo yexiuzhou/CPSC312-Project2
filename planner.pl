@@ -8,19 +8,17 @@
 q(Ans) :-
     write("Ask me: "),
     readln(Q),
-    transcript(T),
-    ask(T, Q, Ans).
+    transcript3(Transcript),
+    ask(Transcript, Q, Ans).
 
 ask(T, ['can', 'i', 'graduate'], 'yes') :- graduated(T).
-% ask(T, ['can', 'i', 'graduate'], 'no') :- \+ graduated(T).
+ask(T, ['can', 'i', 'graduate'], 'no') :- \+ graduated(T).
 
 ask(T, ['have', 'i', 'met' | Req], 'yes') :- requirementPhrase(Req, T).
-ask(T, ['have', 'i', 'met' | Req], 'no') :- \+ requirementPhrase(Req, T).
+% ask(T, ['have', 'i', 'met' | Req], 'no') :- \+ requirementPhrase(Req, T).
 
 ask(T, ['did', 'i', 'complete' | Course], 'yes') :- member(Course, T).
 ask(T, ['did', 'i', 'complete' | Course], 'no') :- \+ member(Course, T).
-
-ask(T, ['what', 'are', 'prereqs', 'for' | C], PreReqs) :- preReqs(PreReqs, C).
 
 ask(T, ['do', 'i', 'have', 'prereqs', 'for' | Course], 'yes') :- havePreReqs(Course, T).
 ask(T, ['do', 'i', 'have', 'prereqs', 'for' | Course], 'no') :- \+ havePreReqs(Course, T).
@@ -253,9 +251,9 @@ removeFromTranscript(T1, [H|T], T2) :-
 % creditCounter(ListOfCourses, Total) is true if Total is the total number of credits that ListOfCourses has
 creditCounter([],0).
 creditCounter([H|T], Total) :-
-    course(H, Credit, _),
+    course(H, credits, C),
     creditCounter(T, NewTotal),
-    Total is Credit+NewTotal.
+    Total is C+NewTotal.
 
 % ---------------------------------
 % Pre-Requisite Helpers
@@ -270,8 +268,13 @@ havePreReqs(C, T) :-
 missingCourses(C, T, Ans) :-
     course(C,_,_),
     preReqs(P, C),
-    \+ subset(P, T),
-    Ans = P.
+    \+ contained_in(P, T),
+    findall(X, (member(X,P), \+ member(X, T)), Out),
+    Ans = Out.
+
+% contained_in(L1, L2) succeeds if all elements of L1 are contained in L2
+contained_in(L1, L2) :- maplist(contains(L2), L1).
+contains(L, X) :- member(X, L).
 
 % containsList(L1, L2) succeeds if all elements of L1 are contained in L2
 % containsList(L1, L2) :- maplist(contains(L2), L1).
@@ -860,6 +863,13 @@ course(phys159, credits, 1).
 course(phys159, name, "phys159").
 course(phys159, requirements, labscience).
 
+% other science courses
+% ---------------------------------
+course(biol111, number, 111).
+course(biol111, department, biol).
+course(biol111, faculty, science).
+course(biol111, credits, 3).
+course(biol111, name, "biol111").
 
 % dummy arts course
 % ---------------------------------
@@ -906,12 +916,19 @@ course(arts303, name, "arts303").
 % ----------------------------------------------------------------------------
 % Pre-Requisite Information
 % ----------------------------------------------------------------------------
-preReqs([Y,Z], cpsc221) :-
-member(Y, [cpsc210, cpen221]),
-member(Z, [cpsc121, math220]).
+preReqs([cpsc110], cpsc210).
+preReqs([cpsc103, cpsc107], cpsc210).
+
+preReqs([X], math210) :- member(X, [math101, math103, math105]).
+preReqs([X], math200) :- member(X, [math101, math103, math105, math121]).
+preReqs([X], math220) :- member(X, [math101, math103, math105, math121]).
+preReqs([X], math221) :- member(X, [math100, math102, math104, math120, math180, math184, math101, math103, math105, math121]).
+preReqs([X], stat200) :- member(X, [math101, math103, math105, math121]).
+preReqs([X], stat302) :- member(X, [math200, math226, math217, math253, math263]).
+preReqs([X], math302) :- member(X, [math200, math226, math217, math253, math263]).
 
 preReqs([W,X,Y,Z], cpsc340) :-
-member(W, [cpsc221]),
-member(X, [math152, math221, math223]),
-member(Y, [math200, math217, math226, math253]),
-member(Z, [stat241, stat251, econ325, econ327, math302, stat302, math318]).
+    member(W, [cpsc221]),
+    member(X, [math221, math223, math152]),
+    member(Y, [math200, math217, math226, math253]),
+    member(Z, [stat302, math302, stat241, stat251, econ325, econ327, math318]).
