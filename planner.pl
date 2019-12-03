@@ -12,7 +12,7 @@ q(Ans) :-
     ask(T, Q, Ans).
 
 ask(T, ['can', 'i', 'graduate'], 'yes') :- graduated(T).
-% ask(T, ['can', 'i', 'graduate'], 'no') :- \+ graduated(T).
+ask(T, ['can', 'i', 'graduate'], 'no') :- \+ graduated(T).
 
 ask(T, ['have', 'i', 'met' | Req], 'yes') :- requirementPhrase(Req, T).
 ask(T, ['have', 'i', 'met' | Req], 'no') :- \+ requirementPhrase(Req, T).
