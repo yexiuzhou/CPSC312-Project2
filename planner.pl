@@ -17,13 +17,13 @@ ask(T, ['can', 'i', 'graduate'], 'no') :- \+ graduated(T).
 ask(T, ['have', 'i', 'met' | Req], 'yes') :- requirementPhrase(Req, T).
 ask(T, ['have', 'i', 'met' | Req], 'no') :- \+ requirementPhrase(Req, T).
 
-ask(T, ['did', 'i', 'complete' | Course], 'yes') :- member(Course, T).
-ask(T, ['did', 'i', 'complete' | Course], 'no') :- \+ member(Course, T).
+ask(T, ['did', 'i', 'complete', Course], 'yes') :- member(Course, T).
+ask(T, ['did', 'i', 'complete', Course], 'no') :- \+ member(Course, T).
 
-ask(T, ['do', 'i', 'have', 'prereqs', 'for' | Course], 'yes') :- havePreReqs(Course, T).
-ask(T, ['do', 'i', 'have', 'prereqs', 'for' | Course], 'no') :- \+ havePreReqs(Course, T).
-ask(T, ['can', 'i', 'take' | Course], 'yes') :- havePreReqs(Course, T).
-ask(T, ['can', 'i', 'take' | Course], 'no') :- \+ havePreReqs(Course, T).
+ask(T, ['do', 'i', 'have', 'prereqs', 'for', Course], 'yes') :- havePreReqs(Course, T).
+ask(T, ['do', 'i', 'have', 'prereqs', 'for', Course], 'no') :- \+ havePreReqs(Course, T).
+ask(T, ['can', 'i', 'take', Course], 'yes') :- havePreReqs(Course, T).
+ask(T, ['can', 'i', 'take', Course], 'no') :- \+ havePreReqs(Course, T).
 
 ask(T, ['what', 'courses', 'do', 'i', 'still', 'need', 'to', 'take' | C], Ans) :- missingCourses(C, T, Ans).
 
