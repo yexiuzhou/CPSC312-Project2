@@ -131,7 +131,7 @@ lab_requirements(T,R) :-
 % coreRequirements(T,T1) is true if transcript T has completed required named courses and 
 % T1 has them removed.
 coreRequirements(T,R) :-
-	removeFromTranscript(T,[cpsc110,cpsc121],T1),
+	removeFirstYearCPSC(T,T1),
 	removeCalc1(T1,T2),
 	removeCalc2(T2,T3),
 	removeFromTranscript(T3,[cpsc210,cpsc221,cpsc213],T4),
@@ -139,6 +139,10 @@ coreRequirements(T,R) :-
 	removeLinAlg(T5,T6),
 	removeStat(T6,T7),
 	removeFromTranscript(T7,[cpsc310,cpsc320,cpsc313],R).
+
+% 2 ways to satisfy first year cs
+removeFirstYearCPSC(T,R) :- removeFromTranscript(T,[cpsc103,cpsc107,cpsc121],R).
+removeFirstYearCPSC(T,R) :- removeFromTranscript(T,[cpsc110,cpsc121]],R).
 
 % all of these are calc 1 courses
 removeCalc1(T,R) :- removeFromTranscript(T,[math100],R).
