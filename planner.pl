@@ -8,7 +8,7 @@
 q(Ans) :-
     write("Ask me: "),
     readln(Q),
-    transcript3(Transcript),
+    transcript4(Transcript),
     ask(Transcript, Q, Ans).
 
 ask(T, ['can', 'i', 'graduate'], 'yes') :- graduated(T).
@@ -25,8 +25,8 @@ ask(T, ['do', 'i', 'have', 'prereqs', 'for', Course], 'no') :- \+ havePreReqs(Co
 ask(T, ['can', 'i', 'take', Course], 'yes') :- havePreReqs(Course, T).
 ask(T, ['can', 'i', 'take', Course], 'no') :- \+ havePreReqs(Course, T).
 
-ask(T, ['what', 'courses', 'do', 'i', 'still', 'need', 'to', 'take' | C], Ans) :- missingCourses(C, T, Ans).
-
+ask(T, ['what', 'courses', 'do', 'i', 'still', 'need', 'to', 'take', Course], 'none') :- missingCourses(Course, T, false).
+ask(T, ['what', 'courses', 'do', 'i', 'still', 'need', 'to', 'take', Course], Ans) :- missingCourses(Course, T, Ans).
 % ---------------------------------
 % Requirement Phrase Helpers
 % ---------------------------------
@@ -269,7 +269,7 @@ missingCourses(C, T, Ans) :-
     course(C,_,_),
     preReqs(P, C),
     \+ contained_in(P, T),
-    findall(X, (member(X,P), \+ member(X, T)), Out),
+    % findall(X, (member(X,P), \+ member(X, T)), Out),
     Ans = Out.
 
 % contained_in(L1, L2) succeeds if all elements of L1 are contained in L2
@@ -299,6 +299,12 @@ course(cpsc103, department, cpsc).
 course(cpsc103, faculty, science).
 course(cpsc103, credits, 3).
 course(cpsc103, name, "cpsc103").
+
+course(cpsc107, number, 107).
+course(cpsc107, department, cpsc).
+course(cpsc107, faculty, science).
+course(cpsc107, credits, 3).
+course(cpsc107, name, "cpsc107").
 
 course(cpsc110, number, 110).
 course(cpsc110, department, cpsc).
@@ -641,6 +647,12 @@ course(math200, faculty, science).
 course(math200, credits, 3).
 course(math200, name, "math200").
 
+course(math210, number, 210).
+course(math210, department, math).
+course(math210, faculty, science).
+course(math210, credits, 3).
+course(math210, name, "math210").
+
 course(math221, number, 221).
 course(math221, department, math).
 course(math221, faculty, science).
@@ -916,8 +928,8 @@ course(arts303, name, "arts303").
 % ----------------------------------------------------------------------------
 % Pre-Requisite Information
 % ----------------------------------------------------------------------------
-preReqs([cpsc110], cpsc210).
 preReqs([cpsc103, cpsc107], cpsc210).
+preReqs([cpsc110], cpsc210).
 
 preReqs([X], math210) :- member(X, [math101, math103, math105]).
 preReqs([X], math200) :- member(X, [math101, math103, math105, math121]).
