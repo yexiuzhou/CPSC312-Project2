@@ -8,7 +8,7 @@
 q(Ans) :-
     write("Ask me: "),
     readln(Q),
-    transcript3(Transcript),
+    transcript(Transcript),  % change transcript here
     ask(Transcript, Q, Ans).
 
 ask(T, ['can', 'i', 'graduate'], 'yes') :- graduated(T).
